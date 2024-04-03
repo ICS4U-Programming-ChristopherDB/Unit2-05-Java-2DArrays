@@ -95,27 +95,27 @@ public final class SecondArrays {
       String[] studentMark = new String[listOfAssignments.size() + 1];
       studentMark[0] = namesArr[i];
       for (int x = 1; x < assignmentsArr.length + 1; x++) {
-        studentMark[x] = GenerateMarks();
+        studentMark[x] = generateMarks();
         System.out.println(studentMark[x]);
       }
       studentMarks[i] = studentMark;
     }
 
     // Writing to CSV file
-    try (BufferedWriter writer = new BufferedWriter(new FileWriter("marks.csv"))) {
+    try (BufferedWriter w = new BufferedWriter(new FileWriter("marks.csv"))) {
       // Writes all student marks to a single line delimited with comma.
       for (String[] studentMark : studentMarks) {
-        writer.write(String.join(",", studentMark));
-        writer.newLine();
+        w.write(String.join(",", studentMark));
+        w.newLine();
       }
       System.out.println("Student marks have been written to " + "marks.csv");
     } catch (IOException e) {
-      System.out.println("Error occurred while writing to file: " + e.getMessage());
+      System.out.println("Error occurred while writing to file");
     }
   }
 
   // Method to calculate assignment marks.
-  private static String GenerateMarks() {
+  private static String generateMarks() {
     Random randGen = new Random();
     final int mark = (int) randGen.nextGaussian() * 10 + 75;
     final String markStr = Integer.toString(mark);
